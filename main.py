@@ -142,7 +142,7 @@ class App:
                 except Exception as e:
                     print(f"Copy error: {e}")
 
-        folders = len(folders_set) - 1  
+        folders = len(folders_set) - 1
 
         self.status.config(text=f"Installed: {files} files, {folders} folders")
 
@@ -161,41 +161,45 @@ class App:
             return
 
         removed_files = 0
+        removed_folders = set()
 
         for current_dir, _, filenames in os.walk(mods):
             rel = os.path.relpath(current_dir, mods)
-            target_dir = os.path.join(gta, rel)
+
+            if rel == ".":
+                rel = ""
+
+            gta_dir = os.path.join(gta, rel)
 
             for file in filenames:
-                path = os.path.join(target_dir, file)
+                gta_file_path = os.path.join(gta_dir, file)
 
-                if os.path.isfile(path):
+                if os.path.isfile(gta_file_path):
                     try:
-                        os.remove(path)
+                        os.remove(gta_file_path)
                         removed_files += 1
                     except OSError as e:
-                        print(f"Remove file error: {path}: {e}")
-                        
-        removed_folders = 0
+                        print(f"Remove file error: {gta_file_path}: {e}")
 
-        for current_dir, _, _ in os.walk(gta, topdown=False):
-            if current_dir == gta:
-                continue
+            removed_folders.add(gta_dir)
 
+        removed_dirs = 0
+
+        for folder in sorted(removed_folders, key=len, reverse=True):
             try:
-                if os.path.isdir(current_dir) and not os.listdir(current_dir):
-                    os.rmdir(current_dir)
-                    removed_folders += 1
+                if os.path.isdir(folder) and not os.listdir(folder):
+                    os.rmdir(folder)
+                    removed_dirs += 1
             except OSError as e:
-                print(f"Remove folder error: {current_dir}: {e}")
+                print(f"Remove folder error: {folder}: {e}")
 
         self.status.config(
-            text=f"Removed: {removed_files} files, {removed_folders} folders"
+            text=f"Removed: {removed_files} files, {removed_dirs} folders"
         )
 
         messagebox.showinfo(
             "Done",
-            f"Removed\nFiles: {removed_files}\nFolders: {removed_folders}"
+            f"Removed\nFiles: {removed_files}\nFolders: {removed_dirs}"
         )
 
 
