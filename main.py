@@ -110,8 +110,6 @@ class App:
         if path:
             self.mods_path.set(path)
 
-    # ================= INSTALL =================
-
     def install(self):
         gta = self.gta_path.get()
         mods = self.mods_path.get()
@@ -126,7 +124,6 @@ class App:
         for current_dir, _, filenames in os.walk(mods):
             rel = os.path.relpath(current_dir, mods)
 
-            # NIE LICZ ROOT
             if rel == ".":
                 rel = ""
 
@@ -145,8 +142,7 @@ class App:
                 except Exception as e:
                     print(f"Copy error: {e}")
 
-        # ✔️ FIX KLUCZOWY
-        folders = len(folders_set) - 1  # odejmujemy root GTA
+        folders = len(folders_set) - 1  
 
         self.status.config(text=f"Installed: {files} files, {folders} folders")
 
@@ -155,7 +151,6 @@ class App:
             f"Installed\nFiles: {files}\nFolders: {folders}"
         )
 
-    # ================= REMOVE =================
 
     def remove(self):
         gta = self.gta_path.get()
@@ -167,7 +162,6 @@ class App:
 
         removed_files = 0
 
-        # usuwanie plików modów tylko jeśli istnieją w GTA
         for current_dir, _, filenames in os.walk(mods):
             rel = os.path.relpath(current_dir, mods)
             target_dir = os.path.join(gta, rel)
@@ -181,8 +175,7 @@ class App:
                         removed_files += 1
                     except OSError as e:
                         print(f"Remove file error: {path}: {e}")
-
-        # usuwanie pustych folderów
+                        
         removed_folders = 0
 
         for current_dir, _, _ in os.walk(gta, topdown=False):
