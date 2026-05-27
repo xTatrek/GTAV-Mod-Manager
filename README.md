@@ -24,7 +24,7 @@ This tool manages GTA V mods using **file path matching between your Mods folder
 
 ## 🧠 Important Notes
 
-- ❗ This is NOT a full synchronization system
+- ❗ This is NOT a full synchronization system (not yet)
 - ❗ It does NOT track original GTA V files
 - ❗ It only matches files based on folder paths
 
