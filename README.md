@@ -20,9 +20,11 @@ Easily install and remove mods with a clean and user-friendly interface.
 ## 🚀 How to Use
 
 ### ⚠️ Notes
-Always run as administrator if GTA V is installed in protected folders
-Make sure you select correct directories
-It is recommended to backup your game before installing mods
+- Always run as administrator if GTA V is installed in protected folders
+- Make sure you select correct directories
+- It is recommended to backup your game before installing mods
+
+---
 
 ### 🪟 Windows (Recommended)
 
