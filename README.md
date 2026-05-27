@@ -50,7 +50,7 @@ Always make a backup of your GTA V directory before using mods.
 
 1. Go to the **Releases** page of this repository  
 2. Download the latest version:
-   - `GTA_V_Mod_Manager.exe`
+   - `GTAV-Mod-Manager.exe`
 
 3. Run the application:
    - Double-click the `.exe` file
